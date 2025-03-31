@@ -212,8 +212,8 @@ GROUP BY C.Name HAVING AVG(AW.Year) > (SELECT AVG(Year) FROM Artworks);
 
 
 /*18. List the artworks that were not exhibited in any exhibition.*/
-SELECT AW.Title FROM Artworks AW 
-WHERE AW.ArtworkID NOT IN (SELECT EA.ArtworkID FROM ExhibitionArtworks EA);
+SELECT AW.Title AS ArtworkTitle FROM Artworks AW LEFT JOIN ExhibitionArtworks EA ON AW.ArtworkID = EA.ArtworkID
+WHERE EA.ExhibitionID IS NULL;
 
 /*19. Show artists who have artworks in the same category as "Mona Lisa."*/
 SELECT A.Name FROM Artists A JOIN Artworks AW ON A.ArtistID=AW.ArtistID
